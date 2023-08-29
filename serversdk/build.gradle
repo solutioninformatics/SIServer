@@ -53,7 +53,7 @@ afterEvaluate {
             release(MavenPublication) {
                 from components.release
 
-                groupId = 'com.github.jacobLsky1'
+                groupId = 'com.github.solutioninformatics'
                 artifactId = 'adroid-dev-util'
                 version = '1.0'
             }
