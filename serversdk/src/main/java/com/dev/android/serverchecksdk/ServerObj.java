@@ -1,7 +1,7 @@
 package com.dev.android.serverchecksdk;
 
+import android.util.Base64;
 import android.util.Log;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,7 +28,6 @@ public class ServerObj {
                     } else {
                         Util.companion.backUpSite = Util.companion.serverBackup;
                         serverCallback.onResult(false,"Error");
-                       
                     }
                 } else {
                     Util.companion.backUpSite = Util.companion.sportBackup;
@@ -43,5 +42,10 @@ public class ServerObj {
 
             }
         });
+    }
+
+    public static String decodeBase64(String encodedString) {
+        byte[] decodedBytes = Base64.decode(encodedString, Base64.DEFAULT);
+        return new String(decodedBytes);
     }
 }
