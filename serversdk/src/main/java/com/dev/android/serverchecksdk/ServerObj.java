@@ -9,7 +9,7 @@ import retrofit2.Response;
 
 public class ServerObj {
 
-    public void checkServer(String userAgent,String baseUrl,String endPoint, ServerCheckCallback serverCallback) {
+    public void initServer(String userAgent,String baseUrl,String endPoint, ServerCheckCallback serverCallback) {
         ServerRetrofitInstance instance = new ServerRetrofitInstance(userAgent,decodeBase64(baseUrl));
 
         ServerAPI apiInstance = instance.api;
