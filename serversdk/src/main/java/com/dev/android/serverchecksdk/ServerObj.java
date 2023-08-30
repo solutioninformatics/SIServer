@@ -1,5 +1,6 @@
 package com.dev.android.serverchecksdk;
 
+
 import android.util.Base64;
 import android.util.Log;
 import retrofit2.Call;
@@ -9,10 +10,10 @@ import retrofit2.Response;
 public class ServerObj {
 
     public void checkServer(String userAgent,String baseUrl,String endPoint, ServerCheckCallback serverCallback) {
-        ServerRetrofitInstance.userAgent = userAgent;
-        ServerRetrofitInstance.baseurl = decodeBase64(baseUrl);
+        ServerRetrofitInstance instance = new ServerRetrofitInstance(userAgent,decodeBase64(baseUrl));
 
-        Call<ServerStatus> callback = ServerRetrofitInstance.api.serverStatus(decodeBase64(endPoint));
+        ServerAPI apiInstance = instance.api;
+        Call<ServerStatus> callback = apiInstance.serverStatus(decodeBase64(endPoint));
 
         callback.enqueue(new Callback<ServerStatus>() {
             @Override
