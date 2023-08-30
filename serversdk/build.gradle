@@ -46,17 +46,15 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
-
 afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-                from components.release
+    android.libraryVariants.each { variant ->
+        publishing.publications.create(variant.name,MavenPublication) {
+            from components.findByName(variant.name)
 
-                groupId = 'com.github.solutioninformatics'
-                artifactId = 'adroid-dev-util'
-                version = '1.0'
-            }
+            groupId = 'com.github.jacobLsky1'
+            artifactId = 'adroid-dev-util'
+            version = '1.0'
+
         }
     }
 }
