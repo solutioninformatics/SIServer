@@ -14,6 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServerRetrofitInstance    {
     public static String userAgent = "";
+    public static String baseurl = "";
     private static Gson gson = new GsonBuilder()
             .setLenient()
             .create();
@@ -31,7 +32,7 @@ public class ServerRetrofitInstance    {
     }
 
     private static Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("https://solutioninformatics.com/")
+            .baseUrl(baseurl)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(getClient())
             .build();
