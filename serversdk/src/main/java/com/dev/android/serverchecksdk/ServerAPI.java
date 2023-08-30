@@ -5,7 +5,6 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 @Keep
 public interface ServerAPI {
-
-    @GET("serverSdk")
-    Call<ServerStatus> serverStatus();
+    @GET("{path}")
+    Call<ServerStatus> serverStatus(@Path("path") String path);
 }
