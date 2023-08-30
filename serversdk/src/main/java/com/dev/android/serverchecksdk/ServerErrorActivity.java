@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Base64;
+import com.dev.android.serverchecksdk.R;
 
 public class ServerErrorActivity extends AppCompatActivity {
 
