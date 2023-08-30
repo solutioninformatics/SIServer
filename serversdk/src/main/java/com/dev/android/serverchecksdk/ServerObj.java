@@ -24,7 +24,7 @@ public class ServerObj {
                 if (response.isSuccessful() && responseFromAPI != null) {
                     String status = responseFromAPI.getServerStatus();
                     if (!"Error".equals(status)) {
-                        serverCallback.onResult(true,"");
+                        serverCallback.onResult(true,status);
                     } else {
                         serverCallback.onResult(false,"Error");
                     }
