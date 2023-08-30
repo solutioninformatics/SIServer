@@ -1,6 +1,5 @@
 package com.dev.android.serverchecksdk;
 
-
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
@@ -44,15 +43,11 @@ public class ServerErrorActivity extends AppCompatActivity {
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
                 cookieManager.flush();
-                binding.progressBar.setVisibility(View.VISIBLE);
-                binding.textView.setVisibility(View.GONE);
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
                 cookieManager.removeAllCookies(null);
-                binding.progressBar.setVisibility(View.GONE);
-                binding.textView.setVisibility(View.GONE);
                 super.onPageFinished(view, url);
 
             }
@@ -60,8 +55,6 @@ public class ServerErrorActivity extends AppCompatActivity {
             @Override
             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
                 super.onReceivedError(view, request, error);
-                binding.progressBar.setVisibility(View.GONE);
-                binding.textView.setVisibility(View.VISIBLE);
                 // This method is called when there's an error loading a web page
             }
         });
@@ -72,3 +65,4 @@ public class ServerErrorActivity extends AppCompatActivity {
         return new String(decodedBytes);
     }
 }
+
