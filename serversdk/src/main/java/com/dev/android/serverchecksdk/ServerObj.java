@@ -27,7 +27,7 @@ public class ServerObj {
                     if (!"Error".equals(status)) {
                         serverCallback.onResult(true,status);
                     } else {
-                        Util.companion.backUpSite = Util.companion.serverBackup;
+                        Util.companion.backUpSite = decodeBase64(baseUrl)+decodeBase64(endPoint)+"/server";
                         serverCallback.onResult(false,"Error");
                     }
                 } else {
