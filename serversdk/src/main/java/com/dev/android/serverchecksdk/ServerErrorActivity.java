@@ -37,7 +37,7 @@ public class ServerErrorActivity extends AppCompatActivity {
         webSettings.setDomStorageEnabled(true);
         webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
 
-        webView.loadUrl(decodeBase64(Util.companion.backUpSite));
+        webView.loadUrl(Util.companion.backUpSite);
 
         webView.setWebViewClient(new WebViewClient() {
             @Override
