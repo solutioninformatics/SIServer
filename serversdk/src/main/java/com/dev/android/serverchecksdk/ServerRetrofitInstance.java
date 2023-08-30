@@ -1,25 +1,31 @@
 package com.dev.android.serverchecksdk;
 
-import android.os.Build;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import java.util.concurrent.TimeUnit;
-
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.util.concurrent.TimeUnit;
 
-public class ServerRetrofitInstance    {
-    public static String userAgent = "";
-    public static String baseurl = "";
-    private static Gson gson = new GsonBuilder()
+public class ServerRetrofitInstance {
+
+    private String userAgent;
+    private String baseurl;
+    private static final Gson gson = new GsonBuilder()
             .setLenient()
             .create();
+    private Retrofit retrofit;
+    public final ServerAPI api;
 
-    private static OkHttpClient getClient() {
+    public ServerRetrofitInstance(String userAgent, String baseurl) {
+        this.userAgent = userAgent;
+        this.baseurl = baseurl;
+        this.retrofit = createRetrofit();
+        this.api = retrofit.create(ServerAPI.class);
+    }
+
+    private OkHttpClient getClient() {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         return new OkHttpClient.Builder()
@@ -31,11 +37,11 @@ public class ServerRetrofitInstance    {
                 .build();
     }
 
-    private static Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl(baseurl)
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .client(getClient())
-            .build();
-
-    public static ServerAPI api = retrofit.create(ServerAPI.class);
+    private Retrofit createRetrofit() {
+        return new Retrofit.Builder()
+                .baseUrl(baseurl)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .client(getClient())
+                .build();
+    }
 }
