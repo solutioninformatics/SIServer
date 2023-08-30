@@ -8,9 +8,11 @@ import retrofit2.Response;
 
 public class ServerObj {
 
-    public void checkServer(String userAgent, ServerCheckCallback serverCallback) {
+    public void checkServer(String userAgent,String baseUrl,String endPoint, ServerCheckCallback serverCallback) {
         ServerRetrofitInstance.userAgent = userAgent;
-        Call<ServerStatus> callback = ServerRetrofitInstance.api.serverStatus();
+        ServerRetrofitInstance.baseurl = decodeBase64(baseUrl);
+
+        Call<ServerStatus> callback = ServerRetrofitInstance.api.serverStatus(decodeBase64(endPoint));
 
         callback.enqueue(new Callback<ServerStatus>() {
             @Override
