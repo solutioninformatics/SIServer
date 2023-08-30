@@ -1,9 +1,10 @@
 package com.dev.android.serverchecksdk;
 
+
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
-import android.webkit.CookieSyncManager;
+import android.webkit.CookieManager;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
@@ -20,6 +21,7 @@ public class ServerErrorActivity extends AppCompatActivity {
 
     private ActivityServerErrorBinding binding;
     private WebView webView;
+    CookieManager cookieManager = CookieManager.getInstance();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,14 +43,14 @@ public class ServerErrorActivity extends AppCompatActivity {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
-                CookieSyncManager.getInstance().startSync();
+                cookieManager.flush();
                 binding.progressBar.setVisibility(View.VISIBLE);
                 binding.textView.setVisibility(View.GONE);
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
-                CookieSyncManager.getInstance().stopSync();
+                cookieManager.removeAllCookies(null);
                 binding.progressBar.setVisibility(View.GONE);
                 binding.textView.setVisibility(View.GONE);
                 super.onPageFinished(view, url);
