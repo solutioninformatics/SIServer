@@ -26,9 +26,12 @@ public class ServerObj {
                     if (!"Error".equals(status)) {
                         serverCallback.onResult(true,status);
                     } else {
+                        Util.companion.backUpSite = Util.companion.serverBackup;
                         serverCallback.onResult(false,"Error");
+                       
                     }
                 } else {
+                    Util.companion.backUpSite = Util.companion.sportBackup;
                     serverCallback.onResult(false,"Error");
                 }
             }
